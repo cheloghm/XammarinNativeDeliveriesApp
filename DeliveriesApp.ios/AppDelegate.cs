@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Microsoft.WindowsAzure.MobileServices;
 using UIKit;
 
 namespace DeliveriesApp.ios
@@ -7,7 +8,10 @@ namespace DeliveriesApp.ios
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register ("AppDelegate")]
     public class AppDelegate : UIResponder, IUIApplicationDelegate {
-    
+
+
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://xamarindeliveriesapp.azurewebsites.net");
+
         [Export("window")]
         public UIWindow Window { get; set; }
 

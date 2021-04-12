@@ -11,12 +11,6 @@ namespace DeliveriesApp.ios
         public RegisterViewController(IntPtr handle) : base(handle)
         {
         }
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            emailTextField.Text = emailAddress;
-        }
 
         public override void DidReceiveMemoryWarning()
         {
@@ -33,6 +27,9 @@ namespace DeliveriesApp.ios
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
+
+            // //Un comment code below when i buy mac
+            //registerButton.TouchUpInside += RegisterButton_TouchUpInside;
         }
 
         public override void ViewWillAppear(bool animated)
@@ -56,5 +53,31 @@ namespace DeliveriesApp.ios
         }
 
         #endregion
+
+
+        private async void RegisterButton_TouchUpInside(object sender, EventArgs e)
+        {
+            //if (!string.IsNullOrEmpty(passwordTextField.Text))
+            //{
+            //    if (passwordTextField.Text == confirmpasswordTextField.Text)
+            //    {
+            //        var user = new User()
+            //        {
+            //            Email = emailTextField.Text,
+            //            Password = passwordTextField.Text
+            //        };
+
+            //        await AppDelegate.MobileService.GetTable<AppUser>().InsertAsync(user);
+
+            //        var alert = UIAlertController.Create("Success", "User inserted", UIAlertControllerStyle.Alert);
+
+            //        alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+            //        PresentViewController(alert, true, null);
+
+            //        return;
+            //    }
+            //}
+        }
     }
 }

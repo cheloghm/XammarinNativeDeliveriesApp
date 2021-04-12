@@ -17,16 +17,36 @@ namespace DeliveriesApp.ios
             //helloButton.TouchUpInside += HelloButton_TouchUpInside;
         }
 
-        //private void HelloButton_TouchUpInside(object sender, EventArgs e)
-        //{
-        //    var alert = UIAlertController.Create("Hello", $"Hello {nameTextField.Text}", UIAlertControllerStyle.Alert);
+        private async void SigninButton_TouchUpInside(object sender, EventArgs e)
+        {
+            var email = emailTextField.Text;
+            var password = passwordTextField.Text;
+            UIAlertController alert = null;
 
-        //    var cancelAction = UIAlertAction.Create("Hello", UIAlertActionStyle.Cancel, null);
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                alert = UIAlertController.Create("Incomplete", "Email and password cannot be empty", UIAlertControllerStyle.Alert);
+                alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
+            }
+            else
+            {
+                var user = (await AppDelegate.MobileService.GetTable<AppUser>().Where(u => u.Email == email).ToListAsync()).FirstOrDefault();
 
-        //    alert.AddAction(cancelAction);
+                if (user.Password == password)
+                {
+                    alert = UIAlertController.Create("Succeed", "Welcome", UIAlertControllerStyle.Alert);
+                    alert.AddAction(UIAlertAction.Create("Thanks", UIAlertActionStyle.Default, null));
+                }
+                else
+                {
+                    alert = UIAlertController.Create("Failure", "Password is incorrect", UIAlertControllerStyle.Alert);
+                    alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
+                }
+            }
 
-        //    PresentViewController(alert, true, null);
-        //}
+            PresentViewController(alert, true, null);
+        }
+
 
         public override void DidReceiveMemoryWarning ()
         {

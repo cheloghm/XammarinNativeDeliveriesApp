@@ -10,37 +10,41 @@ namespace DeliveriesApp.ios
     [Register("RegisterViewController")]
     partial class RegisterViewController
     {
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UITextField confirmpasswordTextField { get; set; }
+        // //Uncomment when i buy mac
 
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UITextField emailTextField { get; set; }
+        //[Outlet]
+        //[GeneratedCode("iOS Designer", "1.0")]
+        //UIKit.UITextField confirmpasswordTextField { get; set; }
 
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UITextField passwordTextField { get; set; }
+        //[Outlet]
+        //[GeneratedCode("iOS Designer", "1.0")]
+        //UIKit.UITextField emailTextField { get; set; }
+
+        //[Outlet]
+        //[GeneratedCode("iOS Designer", "1.0")]
+        //UIKit.UITextField passwordTextField { get; set; }
 
         void ReleaseDesignerOutlets()
         {
-            if (confirmpasswordTextField != null)
-            {
-                confirmpasswordTextField.Dispose();
-                confirmpasswordTextField = null;
-            }
+            // //Uncomment when i buy mac
 
-            if (emailTextField != null)
-            {
-                emailTextField.Dispose();
-                emailTextField = null;
-            }
+            //if (confirmpasswordTextField != null)
+            //{
+            //    confirmpasswordTextField.Dispose();
+            //    confirmpasswordTextField = null;
+            //}
 
-            if (passwordTextField != null)
-            {
-                passwordTextField.Dispose();
-                passwordTextField = null;
-            }
+            //if (emailTextField != null)
+            //{
+            //    emailTextField.Dispose();
+            //    emailTextField = null;
+            //}
+
+            //if (passwordTextField != null)
+            //{
+            //    passwordTextField.Dispose();
+            //    passwordTextField = null;
+            //}
         }
     }
 }

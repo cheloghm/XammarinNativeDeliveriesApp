@@ -28,15 +28,34 @@ namespace DeliveriesApp.droid
             confirmPasswordEditText = FindViewById<EditText>(Resource.Id.confirmPasswordEditText);
             registerButton = FindViewById<Button>(Resource.Id.registerUserButton);
 
-            registerButton.Click += RegisterButton_Click;
+            registerButton.Click += RegisterButton_ClickAsync;
 
             string email = Intent.GetStringExtra("email");
             emailEditText.Text = email;
         }
 
-        private void RegisterButton_Click(object sender, EventArgs e)
+        private async void RegisterButton_ClickAsync(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(passwordEditText.Text))
+            {
+                if (passwordEditText.Text == confirmPasswordEditText.Text)
+                {
+                    var appuser = new AppUser()
+                    {
+                        Email = emailEditText.Text,
+                        Password = passwordEditText.Text
+                    };
 
+                    await MainActivity.MobileService.GetTable<AppUser>().InsertAsync(appuser);
+                    Toast.MakeText(this, "Success", ToastLength.Long).Show();
+                    return;
+                }
+
+                Toast.MakeText(this, "Passwords don't match", ToastLength.Long).Show();
+            }
+
+            Toast.MakeText(this, "Password cannot be empty", ToastLength.Long).Show();
         }
     }
+    
 }
