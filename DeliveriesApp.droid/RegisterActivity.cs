@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using DeliveriesApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,25 +37,12 @@ namespace DeliveriesApp.droid
 
         private async void RegisterButton_ClickAsync(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(passwordEditText.Text))
-            {
-                if (passwordEditText.Text == confirmPasswordEditText.Text)
-                {
-                    var appuser = new AppUser()
-                    {
-                        Email = emailEditText.Text,
-                        Password = passwordEditText.Text
-                    };
+            var result = await AppUser.Register(emailEditText.Text, passwordEditText.Text, confirmPasswordEditText.Text);
 
-                    await MainActivity.MobileService.GetTable<AppUser>().InsertAsync(appuser);
-                    Toast.MakeText(this, "Success", ToastLength.Long).Show();
-                    return;
-                }
-
-                Toast.MakeText(this, "Passwords don't match", ToastLength.Long).Show();
-            }
-
-            Toast.MakeText(this, "Password cannot be empty", ToastLength.Long).Show();
+            if (result)
+                Toast.MakeText(this, "Success", ToastLength.Long).Show();
+            else
+                Toast.MakeText(this, "Try again", ToastLength.Long).Show();
         }
     }
     

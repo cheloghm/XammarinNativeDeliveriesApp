@@ -10,8 +10,6 @@ namespace DeliveriesApp.ios
     public class AppDelegate : UIResponder, IUIApplicationDelegate {
 
 
-        public static MobileServiceClient MobileService = new MobileServiceClient("https://xamarindeliveriesapp.azurewebsites.net");
-
         [Export("window")]
         public UIWindow Window { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿
+using DeliveriesApp.Model;
 using Foundation;
 using System;
 using System.Drawing;
@@ -57,27 +58,21 @@ namespace DeliveriesApp.ios
 
         private async void RegisterButton_TouchUpInside(object sender, EventArgs e)
         {
-            //if (!string.IsNullOrEmpty(passwordTextField.Text))
-            //{
-            //    if (passwordTextField.Text == confirmpasswordTextField.Text)
-            //    {
-            //        var user = new User()
-            //        {
-            //            Email = emailTextField.Text,
-            //            Password = passwordTextField.Text
-            //        };
+            var result = await AppUser.Register(emailTextField.Text, passwordTextField.Text, confirmpasswordTextField.Text);
+            UIAlertController alert = null;
 
-            //        await AppDelegate.MobileService.GetTable<AppUser>().InsertAsync(user);
+            if (result)
+            {
+                alert = UIAlertController.Create("Success", "User inserted", UIAlertControllerStyle.Alert);
+            }
+            else
+            {
+                alert = UIAlertController.Create("Failure", "Try again", UIAlertControllerStyle.Alert);
+            }
 
-            //        var alert = UIAlertController.Create("Success", "User inserted", UIAlertControllerStyle.Alert);
+            alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-            //        alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-
-            //        PresentViewController(alert, true, null);
-
-            //        return;
-            //    }
-            //}
+            PresentViewController(alert, true, null);
         }
     }
 }

@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SharedCode.cs" />
+    <Compile Include="Model\AppUser.cs" />
+    <Compile Include="Model\AzureHelper.cs" />
+    <Compile Include="Model\Delivery.cs" />
+    <Compile Include="Model\DeliveryPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

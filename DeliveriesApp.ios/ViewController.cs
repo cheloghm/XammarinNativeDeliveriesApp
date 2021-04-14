@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using DeliveriesApp.Model;
+using Foundation;
 using System;
 using UIKit;
 
@@ -23,27 +24,18 @@ namespace DeliveriesApp.ios
             var password = passwordTextField.Text;
             UIAlertController alert = null;
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            var result = await AppUser.Login(email, password);
+
+            if (result)
             {
-                alert = UIAlertController.Create("Incomplete", "Email and password cannot be empty", UIAlertControllerStyle.Alert);
-                alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
+                alert = UIAlertController.Create("Success", "Welcome", UIAlertControllerStyle.Alert);
             }
             else
             {
-                var user = (await AppDelegate.MobileService.GetTable<AppUser>().Where(u => u.Email == email).ToListAsync()).FirstOrDefault();
-
-                if (user.Password == password)
-                {
-                    alert = UIAlertController.Create("Succeed", "Welcome", UIAlertControllerStyle.Alert);
-                    alert.AddAction(UIAlertAction.Create("Thanks", UIAlertActionStyle.Default, null));
-                }
-                else
-                {
-                    alert = UIAlertController.Create("Failure", "Password is incorrect", UIAlertControllerStyle.Alert);
-                    alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
-                }
+                alert = UIAlertController.Create("Failure", "Couldn't log you in, please try again later", UIAlertControllerStyle.Alert);
             }
 
+            alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
             PresentViewController(alert, true, null);
         }
 

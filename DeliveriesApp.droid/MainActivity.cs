@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using DeliveriesApp.Model;
 using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DeliveriesApp.droid
     [Activity(Label = "Delivery App", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        public static MobileServiceClient MobileService = new MobileServiceClient("https://xamarindeliveriesapp.azurewebsites.net");
+        
         EditText emailEditText, passwordEditText;
         Button signinButton, registerButton;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -44,19 +45,12 @@ namespace DeliveriesApp.droid
             var email = emailEditText.Text;
             var password = passwordEditText.Text;
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-            {
-                Toast.MakeText(this, "Email and password cannot be empty", ToastLength.Long).Show();
-            }
-            else
-            {
-                var user = (await MobileService.GetTable<AppUser>().Where(u => u.Email == email).ToListAsync()).FirstOrDefault();
+            var result = await AppUser.Login(email, password);
 
-                if (user.Password == password)
-                    Toast.MakeText(this, "Login successfull", ToastLength.Long).Show();
-                else
-                    Toast.MakeText(this, "Incorrect password", ToastLength.Long).Show();
-            }
+            if (result)
+                Toast.MakeText(this, "Welcome", ToastLength.Long).Show();
+            else
+                Toast.MakeText(this, "Try again later", ToastLength.Long).Show();
         }
     
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
