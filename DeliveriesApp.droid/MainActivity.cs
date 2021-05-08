@@ -48,7 +48,12 @@ namespace DeliveriesApp.droid
             var result = await AppUser.Login(email, password);
 
             if (result)
+            {
                 Toast.MakeText(this, "Welcome", ToastLength.Long).Show();
+                Intent intent = new Intent(this, typeof(TabsActivity));
+                StartActivity(intent);
+                Finish();
+            }
             else
                 Toast.MakeText(this, "Try again later", ToastLength.Long).Show();
         }
