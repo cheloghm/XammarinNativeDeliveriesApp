@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using DeliveriesApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,13 @@ namespace DeliveriesApp.droid
 {
     public class DeliveredFragment : Android.Support.V4.App.ListFragment
     {
-        public override void OnCreate(Bundle savedInstanceState)
+        public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-        }
-
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            // Use this to return your custom view for this Fragment
-             return inflater.Inflate(Resource.Layout.Delivered, container, false);
+            var delivered = await Delivery.GetDelivered();
+            ListAdapter = new DeliveryAdapter(Activity, delivered);
         }
     }
 }
