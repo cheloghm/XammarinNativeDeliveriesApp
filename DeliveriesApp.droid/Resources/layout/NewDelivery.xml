@@ -17,4 +17,27 @@
         android:layout_height="wrap_content"
         android:id="@+id/saveButton" />
 
+    <TextView
+        android:text="Locate Package Origin"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/mapFragment"
+        class="com.google.android.gms.maps.MapFragment" />
+  <TextView
+      android:text="Locate Package Destination"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/textView2" />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/destinationMapFragment"
+        class="com.google.android.gms.maps.MapFragment" />
+
 </LinearLayout>
